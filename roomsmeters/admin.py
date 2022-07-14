@@ -30,3 +30,23 @@ class WaterdateAdmin(admin.ModelAdmin):
 @admin.register(models.Electricitydate)
 class ElectricitydateAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(models.Rentaroom)
+class RentaroomAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.Lessor)
+class LessorAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.Spotwater)
+class SpotwaterAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.Spotelectr)
+class SpotelectrAdmin(admin.ModelAdmin):
+    pass
