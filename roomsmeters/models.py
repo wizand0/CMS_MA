@@ -6,6 +6,7 @@ class Watermeter(models.Model):
     serialnumber = models.CharField(unique=True, max_length=30, primary_key=True, null=False, blank=False,
                                     verbose_name="Серийный номер")
     verificationdate = models.DateField(blank=True, verbose_name="Дата поверки")
+    #startdate = models.DateField(verbose_name="Дата установки")
 
     def __str__(self):
         return self.name
@@ -20,6 +21,7 @@ class Electricitymeter(models.Model):
     name = models.CharField(max_length=100, verbose_name="Название")
     serialnumber = models.CharField(unique=True, max_length=30, primary_key=True, null=False, blank=False,
                                     verbose_name="Серийный номер")
+    #startdate = models.DateField(verbose_name="Дата установки")
     verificationdate = models.DateField(blank=True, verbose_name="Дата поверки")
     ratio_transform = models.PositiveSmallIntegerField(null=False, blank=False, default=1,
                                                        verbose_name="Коэффициент трансформации")
@@ -131,6 +133,8 @@ class Waterdate(models.Model):
                                      verbose_name="Серийный номер")
     datedata = models.DateField(null=False, blank=False, verbose_name="Дата снятия показаний")
     consumption = models.PositiveSmallIntegerField(blank=False, verbose_name="Текущее показание")
+    difference = models.PositiveIntegerField(blank=False, default=0, verbose_name="Разность")
+    suminrubles = models.FloatField(blank=False, default=0, verbose_name="Сумма реализации")
 
     def __str__(self):
         return f"{self.datedata} - {self.serialnumber} - {self.consumption}"
@@ -146,6 +150,8 @@ class Electricitydate(models.Model):
                                      verbose_name="Серийный номер")
     datedata = models.DateField(null=False, blank=False, verbose_name="Дата снятия показаний")
     consumption = models.PositiveIntegerField(blank=False, verbose_name="Текущие показание")
+    difference = models.PositiveIntegerField(blank=False, default=0, verbose_name="Разность")
+    suminrubles = models.FloatField(blank=False, default=0, verbose_name="Сумма реализации")
 
     def __str__(self):
         return f"{self.datedata} - {self.serialnumber} - {self.consumption}"

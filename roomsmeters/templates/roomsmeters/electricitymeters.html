@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Список электросчетчиков</title>
+</head>
+<body>
+<h1>Список счетчиков электроэнергии</h1>
+<hr>
+<p>Скоро он здесь будет много электросчетчиков. А пока их всего {{ Electricitymeter_number }} шт.</p>
+  <style type="text/css">
+   table {
+    background: maroon; /* Цвет фона таблицы */
+    color: black; /* Цвет текста */
+   }
+   td {
+    background: yellow; /* Цвет фона ячеек */
+   }
+  </style>
+<table cellpadding="4" cellspacing="1">
+<tr>
+    <td>Арендатор</td>
+    <td>Серийный номер</td>
+    <td>Коэф. трансформации</td>
+    <td>Коэф. потерь</td>
+    <td>Номер помещения</td>
+    <td>Есть вода?</td>
+    <td>Есть ЭЭ?</td>
+</tr>
+    {% for meter in Electricitymeter_objects %}
+    {% for rentroom in Rentaroom_objects %}
+    <tr>
+        <td>{{ rentroom.renter.name }}</td>
+        <td>{{ meter.serialnumber }}</td>
+        <td>{{ meter.ratio_transform }}</td>
+        <td>{{ meter.ratio_loss }}</td>
+        <td>{{ rentroom.room.name }}</td>
+        <td>{{ rentroom.room.iswater }}</td>
+        <td>{{ rentroom.room.iselectricity }}</td>
+
+</tr>
+    {% endfor %}
+    {% endfor %}
+
+      </table>
+</body>
+</html>
