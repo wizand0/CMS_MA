@@ -24,5 +24,5 @@ urlpatterns = [
 
 urlpatterns += [
 
-    path('roomsmeters', include('roomsmeters.urls')),
+    path('', include('roomsmeters.urls')),
 ]

@@ -6,5 +6,5 @@ from . import views
 
 urlpatterns = [
 
-    path('/', views.electricitymeters_list),
+    path('', views.allmeters_list),
 ]

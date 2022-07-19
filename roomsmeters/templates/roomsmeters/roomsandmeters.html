@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Список электросчетчиков</title>
+</head>
+<body>
+<h2>MMS</h2>
+<p>Meters Managmement System <br>
+    Версия приложения <br>
+    {{ app_version }}</p>
+
+
+<h1>Список счетчиков по помещениями и арендаторам</h1>
+<hr>
+<h2>Список счетчиков по электроэнергии.</h2>
+<p>Всего их  {{ Electricitymeter_number }} шт.</p>
+  <style type="text/css">
+   table {
+    background: maroon; /* Цвет фона таблицы */
+    color: black; /* Цвет текста */
+   }
+   td {
+    background: yellow; /* Цвет фона ячеек */
+   }
+  </style>
+<table cellpadding="4" cellspacing="1">
+<tr>
+    <td>Участок</td>
+    <td>Арендатор</td>
+    <td>Номер помещения</td>
+    <td>Корпус</td>
+    <td>Этаж</td>
+    <td>Серийный номер электросчетчика</td>
+    <td>Коэф. трансформации</td>
+    <td>Коэф. потерь</td>
+<td>Тариф ЭЭ</td>
+
+    <td>Есть ЭЭ?</td>
+    <td>Арендодатель</td>
+    </tr>
+
+
+    {% for meter in Electricitymeter_objects %}
+    {% for rentroom in Rentaroom_objects %}
+
+
+    <tr>
+        <td>{{ rentroom.spotelectr }}</td>
+        <td>{{ rentroom.renter.name }}</td>
+        <td>{{ rentroom.room.name }}</td>
+        <td>{{ rentroom.room.building }}</td>
+        <td>{{ rentroom.room.floor }}</td>
+        <td>{{ meter.serialnumber }}</td>
+        <td>{{ meter.ratio_transform }}</td>
+        <td>{{ meter.ratio_loss }}</td>
+        <td>{{ rentroom.tarifofelectricity }}</td>
+        <td>{{ rentroom.iselectricity }}</td>
+        <td>{{ rentroom.lessor }}</td>
+</tr>
+
+
+
+
+    {% endfor %}
+    {% endfor %}
+    </table>
+
+<h2>Список счетчиков по воде.</h2>
+<p>Всего их  {{ Watermeter_number }} шт.</p>
+
+    <table cellpadding="4" cellspacing="1">
+<tr>
+    <td>Участок</td>
+    <td>Арендатор</td>
+    <td>Номер помещения</td>
+    <td>Корпус</td>
+    <td>Этаж</td>
+    <td>Серийный номер счетчика воды</td>
+
+<td>Тариф за воду</td>
+    <td>Есть вода?</td>
+    <td>Арендодатель</td>
+
+    </tr>
+
+    {% for watermeter in Watermeter_objects %}
+    {% for rentroom in Rentaroom_objects %}
+    <tr>
+        <td>{{ rentroom.spotwater }}</td>
+        <td>{{ rentroom.renter.name }}</td>
+        <td>{{ rentroom.room.name }}</td>
+        <td>{{ rentroom.room.building }}</td>
+        <td>{{ rentroom.room.floor }}</td>
+        <td>{{ watermeter.serialnumber }}</td>
+        <td>{{ rentroom.tarifofwater }}</td>
+        <td>{{ rentroom.iswater }}</td>
+        <td>{{ rentroom.lessor }}</td>
+
+</tr>
+
+{% endfor %}
+    {% endfor %}
+
+      </table>
+</body>
+</html>
