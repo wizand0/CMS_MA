@@ -5,7 +5,7 @@ class Watermeter(models.Model):
     name = models.CharField(max_length=100, verbose_name="Название")
     serialnumber = models.CharField(unique=True, max_length=30, primary_key=True, null=False, blank=False,
                                     verbose_name="Серийный номер")
-    verificationdate = models.DateField(blank=True, verbose_name="Дата поверки")
+    verificationdate = models.DateField(blank=True, null=True, default="", verbose_name="Дата поверки")
     #startdate = models.DateField(verbose_name="Дата установки")
 
     def __str__(self):

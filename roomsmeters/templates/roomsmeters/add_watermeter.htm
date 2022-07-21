@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Список электросчетчиков</title>
+</head>
+<body>
+
+{% load widget_tweaks %}
+
+<h2>MMS</h2>
+<p>Meters Managmement System <br>
+    Версия приложения <br>
+    {{ app_version }}</p>
+
+
+<h1>Добавить новый счетчик</h1>
+
+
+    <form method="POST" class="post-form">{% csrf_token %}
+<!--        {{ form.as_p }}-->
+        <p><b>Серийный номер: </b>{{ form.serialnumber|attr:"autofocus" }} </p>
+        <p><p><b>Дата поверки: </b>{{ form.verificationdate }}</p>
+        <button type="submit" class="save btn btn-default">Сохранить</button>
+    </form>
+
+
+</body>
+</html>
