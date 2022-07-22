@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}
+  <title>Добавить новое показание счетчика ЭЭ</title>
+{% endblock %}
+
+
+{% block content %}
+{% load widget_tweaks %}
+<h1>Добавить новое показание счетчика ЭЭ</h1>
+
+
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Сохранить</button>
+
+    </form>
+
+
+<table cellpadding="4" cellspacing="1">
+<tr>
+    <td>Участок</td>
+    <td>Арендатор</td>
+    <td>Номер помещения</td>
+    <td>Корпус</td>
+    <td>Этаж</td>
+    <td>Серийный номер электросчетчика</td>
+    <td>Коэф. трансформации</td>
+    <td>Коэф. потерь</td>
+<td>Тариф ЭЭ</td>
+
+    <td>Есть ЭЭ?</td>
+    <td>Арендодатель</td>
+    </tr>
+
+
+
+    {% for obj in obj %}
+
+
+    <tr>
+        <td>{{ obj.room }}</td>
+        <td>{{ obj.electricitymeter }}</td>
+
+<!--        <td>{{ rentroom.room.floor }}</td>-->
+<!--        <td>{{ meter.serialnumber }}</td>-->
+<!--        <td>{{ meter.ratio_transform }}</td>-->
+<!--        <td>{{ meter.ratio_loss }}</td>-->
+<!--        <td>{{ rentroom.tarifofelectricity }}</td>-->
+<!--        <td>{{ rentroom.iselectricity }}</td>-->
+<!--        <td>{{ rentroom.lessor }}</td>-->
+</tr>
+
+
+
+
+
+    {% endfor %}
+    </table>
+
+
+{% endblock %}

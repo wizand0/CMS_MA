@@ -1,19 +1,21 @@
 {% extends 'base.html' %}
 {% block title %}
-  <title>Добавление арендодатель-арендатор</title>
+  <title>Добавить новое показание счетчика ЭЭ</title>
 {% endblock %}
 
 
 {% block content %}
 {% load widget_tweaks %}
-<h1>Добавить новые отношения арендодатель-арендатор</h1>
+<h1>Добавить новое показание счетчика ЭЭ</h1>
 
 
     <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-<!--        <p><b>Серийный номер: </b>{{ form.serialnumber|attr:"autofocus" }} </p>-->
-<!--        <p><p><b>Дата поверки: </b>{{ form.verificationdate }}</p>-->
+<!--        {{ form.as_p }}-->
+        <p><b>Серийный номер: </b>{{ form.serialnumber|attr:"autofocus" }} </p>
+        <p><p><b>Дата внесения показаций: </b>{{ form.datedata }}</p>
+        <p><p><b>Текущее показание </b>{{ form.consumption }}</p>
         <button type="submit" class="save btn btn-default">Сохранить</button>
+
         {% if form.errors %}
     {% for field in form %}
         {% for error in field.errors %}
@@ -28,7 +30,7 @@
         </div>
     {% endfor %}
 {% endif %}
-    </form>
 
+    </form>
 
 {% endblock %}

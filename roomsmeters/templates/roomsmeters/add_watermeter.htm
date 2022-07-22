@@ -1,23 +1,12 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Список электросчетчиков</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}
+  <title>Добавить новый счетчик воды</title>
+{% endblock %}
 
+
+{% block content %}
 {% load widget_tweaks %}
-
-<h2>MMS</h2>
-<p>Meters Managmement System <br>
-    Версия приложения <br>
-    {{ app_version }}</p>
-
-
-<h1>Добавить новый счетчик</h1>
+<h1>Добавить новый счетчик воды</h1>
 
 
     <form method="POST" class="post-form">{% csrf_token %}
@@ -25,8 +14,22 @@
         <p><b>Серийный номер: </b>{{ form.serialnumber|attr:"autofocus" }} </p>
         <p><p><b>Дата поверки: </b>{{ form.verificationdate }}</p>
         <button type="submit" class="save btn btn-default">Сохранить</button>
+
+        {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
     </form>
 
-
-</body>
-</html>
+{% endblock %}

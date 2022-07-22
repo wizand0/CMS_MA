@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'roomsmeters',
     'widget_tweaks',
+
 ]
 
 MIDDLEWARE = [

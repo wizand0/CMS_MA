@@ -24,13 +24,13 @@ class RoomAdmin(admin.ModelAdmin):
 
 @admin.register(models.Waterdate)
 class WaterdateAdmin(admin.ModelAdmin):
-    list_display = ['serialnumber', 'datedata', 'consumption', 'difference', 'suminrubles']
+    list_display = ['serialnumber', 'datedata', 'consumption']
     list_filter = ['serialnumber', 'datedata']
 
 
 @admin.register(models.Electricitydate)
 class ElectricitydateAdmin(admin.ModelAdmin):
-    list_display = ['serialnumber', 'datedata', 'consumption', 'difference', 'suminrubles']
+    list_display = ['serialnumber', 'datedata', 'consumption']
     list_filter = ['serialnumber', 'datedata']
 
 
