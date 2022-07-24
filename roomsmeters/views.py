@@ -1,10 +1,10 @@
-import datetime
+from datetime import timedelta
 
 from django.conf import settings as conf_settings
-from .models import Electricitymeter, Rentaroom, Room, Watermeter, Lessor, Waterdate
-from .forms import WatermeterForm, RentaroomForm, ElectricitymeterForm, WaterdateForm, ElectricitydateForm, MyForm
+from django.shortcuts import render
 
-from django.shortcuts import get_object_or_404, redirect, render
+from .forms import WatermeterForm, RentaroomForm, ElectricitymeterForm, WaterdateForm, ElectricitydateForm, MyForm
+from .models import Electricitymeter, Rentaroom, Room, Watermeter, Electricitydate
 
 
 def allmeters_list(request):
@@ -83,7 +83,6 @@ def add_waterdata(request):
             return render(request, 'roomsmeters/add_waterdata.htm', {'form': form})
     else:
         form = WaterdateForm()
-
     return render(request, 'roomsmeters/add_waterdata.htm', {'form': form})
 
 
@@ -108,54 +107,32 @@ def outputmetersdata(request):
 
         if form.is_valid():
             form = form.cleaned_data
-            # now in the object cd, you have the form as a dictionary.
+            startdataperiod = form['startdataperiod']
+            enddataperiod = form['enddataperiod']
+
             pk = form['lessor']
 
             pkid = pk.id
 
             obj = Rentaroom.objects.all().filter(lessor_id=pkid)
 
-            # room = obj.room
-            #
-            # electricitymeter
-            # electricitymeter_id = obj.electricitymeter_id
-            # id
-            # iselectricity
-            # isfree
-            # iswater
-            # lessor
-            # lessor_id
-            # renter
-            # renter_id
-            # room
-            # room_id
-            # spotelectr
-            # spotelectr_id
-            # spotwater
-            # spotwater_id
-            # tarifofelectricity
-            # tarifofwater
-            # watermeter
-            #
-            # Waterdate.electricitymeter_id
-            # objel = Waterdate.objects.get(electricitymeter_id=electricitymeter_id)
-            # datedata = objel.datedata
-            # consumption = objel.consumption
-            # difference = objel.difference
-            # suminrubles = objel.suminrubles
+            startdate = startdataperiod - timedelta(days=3)
+            enddate = startdataperiod + timedelta(days=3)
+
+            startconsumption = Electricitydate.objects.filter(datedata__range=[startdate, enddate])
+
+            sumofkilowatt = 25
             context = {
                 'obj': obj,
-                # 'electricitymeter_id': electricitymeter_id,
+                'startdataperiod': startdataperiod,
+                'enddataperiod': enddataperiod,
+                'sumofkilowatt': sumofkilowatt,
+                'pk': pk,
+
             }
 
-        return render(request, 'roomsmeters/outputmetersdata.htm',  context)
+        return render(request, 'roomsmeters/outputmetersdata.htm', context)
     else:
         form = MyForm()
 
     return render(request, 'roomsmeters/outputmetersdata.htm', {'form': form})
-
-    # blah blah encode parameters for a url blah blah
-    # and make another post request
-    # edit : added ": "  after    if request.method=='POST'
-
-

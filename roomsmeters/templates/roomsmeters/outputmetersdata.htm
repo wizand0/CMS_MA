@@ -6,7 +6,8 @@
 
 {% block content %}
 {% load widget_tweaks %}
-<h1>Добавить новое показание счетчика ЭЭ</h1>
+
+<h1> Показания за период с {{ startdataperiod }} - {{ enddataperiod }} </h1>
 
 
     <form method="POST" class="post-form">{% csrf_token %}
@@ -24,6 +25,8 @@
     <td>Корпус</td>
     <td>Этаж</td>
     <td>Серийный номер электросчетчика</td>
+    <td>Предыдущие показания</td>
+    <td>Текущие показания</td>
     <td>Коэф. трансформации</td>
     <td>Коэф. потерь</td>
 <td>Тариф ЭЭ</td>
@@ -38,8 +41,20 @@
 
 
     <tr>
+        <td>{{ obj.spotelectr }}</td>
+        <td>{{ obj.renter }}</td>
         <td>{{ obj.room }}</td>
+        <td>{{ obj.room.floor }}</td>
+        <td>{{ obj.room.building }}</td>
+
         <td>{{ obj.electricitymeter }}</td>
+        <td>{{ obj.electricitymeter. }}</td>
+        <td>{{ enddataperiod }}</td>
+        <td>{{ obj.electricitymeter.ratio_transform }}</td>
+        <td>{{ obj.electricitymeter.ratio_loss }}</td>
+        <td>{{ sumofkilowatt }}</td>
+        <td>{{ obj.tarifofelectricity }}</td>
+        <td>{{ pk }}</td>
 
 <!--        <td>{{ rentroom.room.floor }}</td>-->
 <!--        <td>{{ meter.serialnumber }}</td>-->
